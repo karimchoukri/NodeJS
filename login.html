@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Game</title>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="style/mystyle.css">
+	<link href='https://fonts.googleapis.com/css?family=Frijole' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+	<h1>BE THE FASTEST</h1>
+	<div id=juego>
+		<div id="logeo">
+			NickName: <input id="nombre" required onkeyup="javascript:this.value=this.value.toUpperCase()"/><button id="enviar">Aceptar</button>
+		</div>
+	</div>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script>
+		var socket = io("/");
+		var ipServer = '10.27.7.205';
+		$('#enviar').on('click', function(){
+			if($("#nombre").val()){
+			var url = window.open('http://'+ipServer+':3000/salaEspera', "_self");
+			socket.emit('nickname',$("#nombre").val());}
+		});
+	</script>
+  </body>
+</html>

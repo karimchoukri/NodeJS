@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+  <head>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="style/mystyle.css">
+	<link href='https://fonts.googleapis.com/css?family=Frijole' rel='stylesheet' type='text/css'>
+    <title>Game Room</title>
+  </head>
+  <body>
+	<h1 >Game Room</h1>
+	<p>En breves minutos se iniciara la partida...</p>
+	<p>PULSA LA TECLA <b>"ESPACIO"</b> 50 VECES PARA GANAR</p>
+	<p>Queda <span></span> jugador.</p>
+	<button id="volver">volver</button>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script>
+		var socket = io("/salaEsperaGame");
+		var ipServer = '10.27.7.205';
+		
+		socket.on('iniciar', function(){
+			var control = window.open('http://'+ ipServer +':3000/Game', '_self');
+		});
+		socket.on('jugadores', function(cont){
+			cont = (cont+1) - cont;
+			$('span').text(cont);
+		});
+		$('#volver').on('click',function(){
+			var url = window.open('http://'+ipServer+':3000/salaEspera', "_self");
+		});
+	</script>
+  </body>
+</html>

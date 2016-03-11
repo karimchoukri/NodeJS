@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <title>chat-room</title>
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="style/mystyle.css">
+	<link href='https://fonts.googleapis.com/css?family=Frijole' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+	<h1>Chat Room</h1>
+	<div>
+		<button id="jugar">Jugar</button>
+		<button id="salir">salir</button>
+	</div>
+	<div id="sala">
+		<form>
+			<fieldset>
+				<legend>Sala de chat</legend>
+				<table  border="2" style="width:600px">
+					<tr>
+						<th style="width:200px">Usuarios</th>
+						<th style="width:400px">Chat</th>
+					</tr>
+					<tr>
+						<td><ul id="jugadores"></ul></td>
+						<td><ul id="chat"></ul></td></td>	
+					</tr>
+				</table>
+				<input id="mensajes" autocomplete="off" type="text" required/><button>Aceptar</button>
+		  </fieldset>
+		</form>
+	</div>
+	
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+	<script>
+		var socket = io("/salaEspera");
+		var ipServer = '10.27.7.205';
+		
+		$('form').submit(function(){
+			socket.emit('chat message', $('#mensajes').val());
+			$('#mensajes').val('');
+			return false;
+		});
+		
+		socket.on('chat message', function(msg){
+			$('#chat').append($('<li>').text(msg));
+		});
+		
+		socket.emit('jugadores');
+		socket.on('jugadores', function(msg){
+			$('#jugadores').append($('<h5>').text(msg));
+		});
+		
+		$('#salir').on('click',function(){
+			var url = window.open('http://'+ipServer+':3000', "_self");
+		});
+		
+		$('#jugar').on('click',function(){
+			var url = window.open('http://'+ipServer+':3000/salaEsperaGame', "_self");
+		})
+	</script>
+  </body>
+</html>

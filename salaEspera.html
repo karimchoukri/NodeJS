@@ -8,6 +8,35 @@
   </head>
   <body>
 	<h1>Chat Room</h1>
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>                        
+		  </button>
+		  <a class="navbar-brand" href="#">Logo</a>
+		</div>
+		<div class="collapse navbar-collapse" id="myNavbar">
+		  <ul class="nav navbar-nav">
+			<li class="active"><a href="#">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Projects</a></li>
+			<li><a href="#">Contact</a></li>
+		  </ul>
+		  <ul class="nav navbar-nav navbar-right">
+			<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		  </ul>
+		</div>
+	  </div>
+	</nav>
+	<div class="container-fluid text-center">
+		<div class="row content">
+			<div style="border:solid 1px black;"class="col-sm-2 sidenav">
+				PUBLICIDAD
+			</div>	
+		<div id="centro"style="border:solid 1px black;"class="col-sm-8 text-left"> 	
 	<div>
 		<button id="jugar">Jugar</button>
 		<button id="salir">salir</button>
@@ -35,7 +64,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 	<script>
 		var socket = io("/salaEspera");
-		var ipServer = '10.27.7.205';
+		var ipServer = '192.168.1.36';
 		
 		$('form').submit(function(){
 			socket.emit('chat message', $('#mensajes').val());
@@ -60,5 +89,16 @@
 			var url = window.open('http://'+ipServer+':3000/salaEsperaGame', "_self");
 		})
 	</script>
+	
+		</div>
+			<div style="border:solid 1px black;"class="col-sm-2 sidenav">
+				PUBLICIDAD
+			</div>
+		</div>	
+	</div>
+	<footer id="pie"style="border:solid 1px black;class="container-fluid text-center">
+	  <p>Juega con nosotros al juego de la cuerda.</p>
+	  <p>Copyright &copy 2016 MKJ. Todos los derechos reservados.</p>
+	</footer>
   </body>
 </html>

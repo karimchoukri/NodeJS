@@ -20,7 +20,10 @@ body {
 }
 #centro{
 	background-image: url("../img/tug.jpg");
-		background-size:100% 120%;
+	background-size:100% 120%;
+}
+.publicidad{
+	height : 402px;
 }
 #juego{
 	
